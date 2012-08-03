@@ -1,4 +1,7 @@
 <?php
+/**
+ * Static helper methods
+ */
 class ActivityStreams {
 	public static function getEntityAtomID(ElggEntity $entity) {
 		$host = parse_url(elgg_get_site_url(), PHP_URL_HOST);
@@ -15,5 +18,9 @@ class ActivityStreams {
 		$id = $item->id;
 		
 		return "tag:$host,$date:/river/$id";
+	}
+
+	public static function formatDate($date) {
+		return date(DATE_ATOM, $date);
 	}
 }

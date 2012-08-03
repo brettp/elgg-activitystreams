@@ -1,3 +1,3 @@
 <?php
 
-echo elgg_view('activitystreams/object/article', $vars);
+echo elgg_view('activity_streams/object/article', $vars);

@@ -1,7 +1,7 @@
 <?php
 $en = array(
-	'activitystreams:verb:create' => 'post',
-	'activitystreams:verb:comment' => 'post',
+	'activity_streams:verb:create' => 'post',
+	'activity_streams:verb:comment' => 'post',
 );
 
 add_translation('en', $en);

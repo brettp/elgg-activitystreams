@@ -27,7 +27,7 @@ $body = elgg_view($item->getView(), array('item' => $item), false, false, 'defau
 </author>
 
 <activity:verb>
-	<?php echo elgg_echo("activitystreams:verb:$item->action_type"); ?>
+	<?php echo elgg_echo("activity_streams:verb:$item->action_type"); ?>
 </activity:verb>
 
 <activity:object>
