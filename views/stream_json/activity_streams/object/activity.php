@@ -99,8 +99,10 @@ if ($item) {
 	}
 }
 
-$activity = activity_streams_build_array($map, $vars);
-$activity['_elgg_river_item'] = $item;
+$properties = activity_streams_build_array($map, $vars);
+//$properties['_elgg_river_item'] = $item;
+
 $vars['type'] = 'activity';
+$vars['properties'] = $properties;
 
 echo elgg_view('activity_streams/object/elements/base', $vars);

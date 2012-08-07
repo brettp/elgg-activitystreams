@@ -10,16 +10,18 @@
  * Optional
  * @uses int    $vars['total_items']    The total number of items in the list
  * @uses string $vars['collection_url'] IRI to a JSON document of the full collection. NOTE THE NAME.
+ * @uses array  $vars['object_types']   An array of object types in the items.
  */
+
+$vars['type'] = 'collection';
 
 $map = array(
 	'items' => 'items',
 	'total_items' => 'totalItems',
-	'collection_url' => 'url'
+	'collection_url' => 'url',
+	'object_types' => 'objectTypes'
 );
 
-$collection = activity_streams_build_array($map, $vars);
-$collection['type'] = 'collection';
+$vars['properties'] = activity_streams_build_array($map, $vars);
 
-echo activity_streams_json_encode($collection, false);
-echo elgg_view('activity_streams/elements/base', $vars);
+echo elgg_view('activity_streams/object/elements/base', $vars);

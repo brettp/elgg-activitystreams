@@ -1,6 +1,6 @@
 <?php
 /**
- * AS media link entry
+ * AS media link
  *
  * @see http://activitystrea.ms/specs/json/1.0/#media-link
  *
@@ -10,9 +10,9 @@
  * @uses string $vars['media_url'] NOTE THE NAME. As of 1.8 elgg_view() clobbers the $vars['url']
  *
  * Optional
- * @uses int $vars['duration']
- * @uses int $vars['height']
- * @uses int $vars['width']
+ * @uses int $vars['duration'] Length in seconds
+ * @uses int $vars['height']   Height in pixels
+ * @uses int $vars['width']    Width in pixels
  */
 
 $map = array(

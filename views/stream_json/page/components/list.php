@@ -29,7 +29,7 @@ if (is_array($items) && count($items) > 0) {
 	}
 }
 
-echo elgg_view('activity_streams/collection', array(
+echo elgg_view('activity_streams/object/collection', array(
 	'items' => activity_streams_json_encode($json, false),
 	'total_items' => count($json),
 	'collection_url' => elgg_http_remove_url_query_element(current_page_url(), 'view')

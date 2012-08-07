@@ -2,13 +2,15 @@
 /**
  * An activity stream Person object type.
  *
+ * @todo Clean this up a bit with the new style objects
+ *
  * @uses ElggUser $vars['entity'] If this is set, the relevant info is extracted
  *
  * Mandatory - See AS/objects/elements/base for descriptions.
  * @uses string        $vars['display_name']
  * @uses AS/media_link $vars['image']
  * @uses string        $vars['id']
- * @uses string        $vars['url']
+ * @uses string        $vars['person_url']
  *
  * Optional-ish (The spec in one place says these are required, then below that says they're optional)
  * @uses string        $vars['published']
@@ -21,12 +23,11 @@ $map = array(
 	'display_name' => 'displayName',
 	'image',
 	'id',
-	'url',
+	'person_url',
 	'published',
-	'updated'
+	'updated',
 );
 
-unset($vars['url']);
 extract($vars);
 
 if ($entity instanceof ElggUser) {
@@ -42,8 +43,8 @@ if ($entity instanceof ElggUser) {
 		$vars['id'] = $entity->getURL();
 	}
 
-	if (!$url) {
-		$vars['url'] = $entity->getURL();
+	if (!$person_url) {
+		$vars['object_url'] = $entity->getURL();
 	}
 
 	if (!$published) {
