@@ -1,6 +1,9 @@
 <?php
 /**
- * The base class for an activity stream JSON object
+ * The base class for an activity stream JSON object.
+ * Other objects accept or require different attributes.
+ *
+ * @see http://activitystrea.ms/specs/json/schema/activity-schema.html#object-types
  *
  * @uses AS/collection    $vars['attachments']           JSON-encoded array of other AS objects.
  * @uses AS/Object/Person $vars['author']                An AS 'person' json object idenfitying the creator of the object.

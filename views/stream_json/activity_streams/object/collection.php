@@ -1,6 +1,6 @@
 <?php
 /**
- * The basis for an AS JSON document. Can be used in other contexts.
+ * The basis for an AS JSON document.
  *
  * @see http://activitystrea.ms/specs/json/1.0/#collection
  *
@@ -19,4 +19,7 @@ $map = array(
 );
 
 $collection = activity_streams_build_array($map, $vars);
+$collection['type'] = 'collection';
+
 echo activity_streams_json_encode($collection, false);
+echo elgg_view('activity_streams/elements/base', $vars);

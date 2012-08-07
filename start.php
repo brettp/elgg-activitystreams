@@ -6,10 +6,18 @@
  *
  * The lowest level of a view chain needs to do a deep encoding
  *	This is the object/* views
- *
- * Every other level needs to do a shallow encoding.
- *
  * 
+ * Every other level needs to do a shallow encoding.
+ * 
+ * Entity views (<type>/<subtype>) are used for the AS objects.
+ *
+ * River views (river/<type>/<subtype>/action) are (will be) used for the content.
+ *
+ * River summary language strings (river:action:type:subtype) are (will be) used for the title.
+ *
+ * References:
+ *  General specs: http://activitystrea.ms/head/activity-schema.html
+ *  JSON specs:    http://activitystrea.ms/specs/json/1.0/
  */
 
 

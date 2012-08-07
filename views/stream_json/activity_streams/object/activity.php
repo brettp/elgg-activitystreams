@@ -1,12 +1,13 @@
 <?php
 /**
- * An AS activity entry
+ * An AS activity object
+ *
  *
  * @see http://activitystrea.ms/specs/json/1.0/#activity
  *
  * @uses ElggRiverItem $vars['item']    If passed, will detect the values for the above. Any values passed in have priority.
  *
- * @uses AS/Object    $vars['actor']        The entity who performed the action. Usually an AS Person.
+ * @uses AS/Object    $vars['actor']        The entity who performed the action. Usually an AS/Person.
  * @uses string       $vars['content']      Natural language describing the action. HTML ok.
  * @uses AS/Object    $vars['generator']    Describes the application that generated the content. Defaults to Elgg.
  * @uses AS/MediaLink $vars['icon']         An icon representing the activity. Aspect is 1:1.
@@ -39,6 +40,10 @@ $map = array(
 	'verb'
 );
 
+if ($item->view == 'river/object/album/create') {
+	$test = true;
+}
+
 if ($item) {
 	if (!$actor) {
 		$actor_entity = $item->getSubjectEntity();
@@ -59,7 +64,7 @@ if ($item) {
 		$target_entity = get_entity($object_entity->container_guid);
 		// elgg's default is to make the container the owner.
 		// don't need to send target in this context
-		if ($target_entity && $target_entity != $object_entity) {
+		if ($object_entity && $target_entity && $target_entity != $object_entity) {
 			$vars['target'] = elgg_view_entity($target_entity);
 		}
 	}
@@ -96,5 +101,6 @@ if ($item) {
 
 $activity = activity_streams_build_array($map, $vars);
 $activity['_elgg_river_item'] = $item;
+$vars['type'] = 'activity';
 
-echo activity_streams_json_encode($activity, false);
+echo elgg_view('activity_streams/object/elements/base', $vars);
