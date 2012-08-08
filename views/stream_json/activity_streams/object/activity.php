@@ -56,11 +56,12 @@ if ($item) {
 	}
 
 	if (!$target) {
+		$actor_entity = $item->getSubjectEntity();
 		$object_entity = $item->getObjectEntity();
 		$target_entity = get_entity($object_entity->container_guid);
 		// elgg's default is to make the container the owner.
 		// don't need to send target in this context
-		if ($object_entity && $target_entity && $target_entity != $object_entity) {
+		if ($actor_entity && $target_entity && $actor_entity->guid != $target_entity->guid) {
 			$vars['target'] = elgg_view_entity($target_entity);
 		}
 	}
@@ -96,7 +97,7 @@ if ($item) {
 }
 
 $properties = activity_streams_build_array($map, $vars);
-$properties['_elgg_river_item'] = $item;
+//$properties['_elgg_river_item'] = $item;
 
 $vars['type'] = 'activity';
 $vars['properties'] = $properties;

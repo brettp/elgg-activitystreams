@@ -6,7 +6,7 @@
  * @uses AS/Collection $vars['mime_type'] The mime type of the object
  */
 
-$vars['type'] = 'event';
+$vars['type'] = 'file';
 
 $map = array(
 	'file_url' => 'fileUrl',
@@ -14,6 +14,5 @@ $map = array(
 );
 
 $vars['properties'] = activity_streams_build_array($map, $vars);
-$vars['type'] = 'file';
 
 echo elgg_view('activity_streams/object/elements/base', $vars);

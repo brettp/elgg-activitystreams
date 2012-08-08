@@ -11,21 +11,16 @@
  * 
  * Entity views (<type>/<subtype>) are used for the AS objects.
  *
- * River views (river/<type>/<subtype>/action) are (will be) used for the content.
- *
- * River summary language strings (river:action:type:subtype) are (will be) used for the title.
+ * River item views are / will be used for the content and title.
+ * $item->view . '/title' and . '/content'
  *
  * References:
- *  General specs: http://activitystrea.ms/head/activity-schema.html
- *  JSON specs:    http://activitystrea.ms/specs/json/1.0/
- */
-
-
-
-/**
- * Start with the river
+ * Where these disagree I've used the JSON specs / schemas.
+ * Where the JSON specs / schemas disagree I've arbitrarily picked one and hoped for the best.
  *
- * Override list views
+ *  General specs: http://activitystrea.ms/head/activity-schema.html
+ *  A slightly different spec: http://activitystrea.ms/specs/json/schema/activity-schema.html
+ *  JSON specs:    http://activitystrea.ms/specs/json/1.0/
  */
 
 function activity_streams_init() {
