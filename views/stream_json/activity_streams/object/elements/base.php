@@ -37,6 +37,47 @@ $map = array(
 	'object_url' => 'url'
 );
 
+// if passed an ElggEntity use it to populate the properties.
+$entity = elgg_extract('entity', $vars);
+if ($entity) {
+	if (!isset($vars['author']) && $vars['type'] != 'person') {
+		$vars['author'] = elgg_view_entity($entity->getOwnerEntity());
+	}
+
+	$dn = $entity->title ? $entity->title : $entity->name;
+	if (!isset($vars['display_name']) && $dn) {
+		$vars['display_name'] = $dn;
+	}
+
+	if (!isset($vars['content']) && $entity->description) {
+		$vars['content'] = $entity->description;
+	}
+
+	if (!isset($vars['id'])) {
+		$vars['object_url'] = $entity->getURL();
+	}
+
+	if (!isset($vars['image'])) {
+		$vars['image'] = elgg_view_entity_icon($entity);
+	}
+
+	if (!isset($vars['published'])) {
+		$vars['published'] = ActivityStreams::formatDate($entity->time_created);
+	}
+
+	if (!isset($vars['summary']) && $entity->title) {
+		$vars['summary'] = $entity->title;
+	}
+
+	if (!isset($vars['updated'])) {
+		$vars['updated'] = ActivityStreams::formatDate($entity->time_updated);
+	}
+
+	if (!isset($vars['object_url'])) {
+		$vars['object_url'] = $entity->getURL();
+	}
+}
+
 $object = activity_streams_build_array($map, $vars);
 
 // pull in object-specific properties

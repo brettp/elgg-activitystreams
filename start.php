@@ -191,3 +191,27 @@ function as_is_json($data) {
 	}
 	return false;
 }
+
+/**
+ * Returns a title suitable for use as an activity title.
+ *
+ * This is usually some form of a river summary.
+ * Checks for <$item->view>/title under the stream_json viewtype.
+ * Will use river/elements/summary under the default viewtype otherwise.
+ *
+ * @param array $vars Vars that include ElggRiverItem $vars['item']
+ * @return string
+ */
+function activity_streams_get_activity_title($vars) {
+	$item = elgg_extract('item', $vars);
+
+	if (!$item) {
+		return false;
+	}
+
+	if (elgg_view_exists($item->view . '/title')) {
+		return elgg_view($item->view . '/title', $vars);
+	}
+
+	return elgg_view('river/elements/summary', $vars, false, false, 'default');
+}

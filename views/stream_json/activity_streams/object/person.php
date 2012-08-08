@@ -1,8 +1,6 @@
 <?php
 /**
- * An activity stream Person object type.
- *
- * @todo Clean this up a bit with the new style objects
+ * An activity stream Person object.
  *
  * @uses ElggUser $vars['entity'] If this is set, the relevant info is extracted
  *
@@ -10,7 +8,7 @@
  * @uses string        $vars['display_name']
  * @uses AS/media_link $vars['image']
  * @uses string        $vars['id']
- * @uses string        $vars['person_url']
+ * @uses string        $vars['object_url']
  *
  * Optional-ish (The spec in one place says these are required, then below that says they're optional)
  * @uses string        $vars['published']
@@ -19,42 +17,6 @@
  * All other valid AS/Object attributes are accepted as optional attributes.
  */
 
-$map = array(
-	'display_name' => 'displayName',
-	'image',
-	'id',
-	'person_url',
-	'published',
-	'updated',
-);
-
-extract($vars);
-
-if ($entity instanceof ElggUser) {
-	if (!$display_name) {
-		$vars['display_name'] = $entity->name;
-	}
-
-	if (!$image) {
-		$vars['image'] = elgg_view_entity_icon($entity);
-	}
-
-	if (!$id) {
-		$vars['id'] = $entity->getURL();
-	}
-
-	if (!$person_url) {
-		$vars['object_url'] = $entity->getURL();
-	}
-
-	if (!$published) {
-		$vars['published'] = ActivityStreams::formatDate($entity->time_created);
-	}
-
-	if (!$updated) {
-		$vars['updated'] = ActivityStreams::formatDate($entity->time_updated);
-	}
-}
 $vars['type'] = 'person';
 
 echo elgg_view('activity_streams/object/elements/base', $vars);

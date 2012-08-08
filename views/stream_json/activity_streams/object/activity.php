@@ -40,10 +40,6 @@ $map = array(
 	'verb'
 );
 
-if ($item->view == 'river/object/album/create') {
-	$test = true;
-}
-
 if ($item) {
 	if (!$actor) {
 		$actor_entity = $item->getSubjectEntity();
@@ -86,8 +82,8 @@ if ($item) {
 	}
 
 	if (!$title) {
-//		$vars['title'] = elgg_view('river/elements/summary', $vars, false, false, 'default');
 //		$vars['title'] = elgg_view('river/elements/title', $vars);
+		$vars['title'] = activity_streams_get_activity_title($vars);
 	}
 
 	if (!$activity_url) {
@@ -100,7 +96,7 @@ if ($item) {
 }
 
 $properties = activity_streams_build_array($map, $vars);
-//$properties['_elgg_river_item'] = $item;
+$properties['_elgg_river_item'] = $item;
 
 $vars['type'] = 'activity';
 $vars['properties'] = $properties;
