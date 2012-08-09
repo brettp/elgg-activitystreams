@@ -27,13 +27,14 @@ function activity_streams_init() {
 	elgg_extend_view('page/elements/head', 'activity_streams/head_ext');
 	
 	elgg_register_viewtype_fallback('atom');
-//	elgg_register_viewtype_fallback('stream_json');
 }
 
 elgg_register_event_handler('init', 'system', 'activity_streams_init');
 
 /**
- * Return
+ * JSON encode data, but for objects and arrays, don't re-encode anything.
+ *
+ * @todo this can be simplified by just always checking the elements and never re-encoding.
  *
  * @param mixed $data      Data to encode
  * @param bool  $recursive Recursively encode arrays or objects, or just the first level?
@@ -61,7 +62,6 @@ function activity_streams_json_encode($data, $recursive = true, $options = 0) {
 	}
 
 	// json encode only the first level of items
-
 	$is_assoc_array = activity_streams_is_assoc($data);;
 	$json = array();
 
@@ -71,10 +71,10 @@ function activity_streams_json_encode($data, $recursive = true, $options = 0) {
 			// if you make objects keys you don't deserve to json encode stuff.
 			if (is_string($k)) {
 				$k = json_encode($k);
-//				$k = str_replace('"', '\"', $k);
-//				$k = activity_streams_fix_newlines($k);
 			}
-			$v = activity_streams_return_json_value($v, $options);
+			if (!as_is_json($v)) {
+				$v = json_encode($v, $options);
+			}
 			
 			$json[] = "$k:$v";
 		}
@@ -82,7 +82,9 @@ function activity_streams_json_encode($data, $recursive = true, $options = 0) {
 		return '{' . $json . '}';
 	} else {
 		foreach ($data as $v) {
-			$json[] = activity_streams_return_json_value($v, $options);
+			if (!as_is_json($v)) {
+				$json[] = json_encode($v, $options);
+			}
 		}
 		$json = implode(',', $json);
 		return "[$json]";
@@ -103,26 +105,6 @@ function activity_streams_return_json_value($v, $options = 0) {
 	} else {
 		return json_encode($v, $options);
 	}
-
-	return;
-	$is_json = json_decode($v);
-
-	if (is_string($v) && !$is_json) {
-		$v = activity_streams_fix_newlines($v);
-		$v = str_replace('"', '\"', $v);
-	}
-
-	if ($is_json || is_int($v)) {
-		// int and json don't need extra "s.
-		return $v;
-	} elseif (is_bool($v)) {
-		// rewrite to js-style bools
-		$v = ($v) ? 'true' : 'false';
-		return $v;
-	} else {
-		// assume a string. this will probably break things. teehee!
-		return "\"$v\"";
-	}
 }
 
 /**
@@ -137,21 +119,6 @@ function activity_streams_is_assoc($array) {
 	}
 	
 	return array_keys($array) !== range(0, sizeof($array) - 1);
-}
-
-/**
- * @Todo
- *
- * @param type $str
- * @return type
- */
-function activity_streams_fix_newlines($str) {
-	// replace newlines with a marker
-	$str = str_replace(array("\n", "\r", "\t"), '__ELGG_AS_SPACE__', $str);
-	// replace all marked occurances with a single space
-	$str = preg_replace('/(__ELGG_AS_SPACE__)+/', ' ', $str);
-
-	return $str;
 }
 
 /**
@@ -180,6 +147,12 @@ function activity_streams_build_array($map, $vars) {
 	return $r;
 }
 
+/**
+ * Is this data json encoded?
+ *
+ * @param string $data
+ * @return boolean
+ */
 function as_is_json($data) {
 	if (json_decode($data)) {
 		return true;
