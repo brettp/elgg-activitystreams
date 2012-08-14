@@ -12,7 +12,7 @@ $body = elgg_view($item->getView(), array('item' => $item), false, false, 'defau
 <id><?php echo ActivityStreams::getRiverAtomID($item); ?></id>
 
 <published>
-	<?php date(DATE_ATOM, $item->getPostedTime()); ?>
+	<?php echo date(DATE_ATOM, $item->getPostedTime()); ?>
 </published>
 
 <title>
