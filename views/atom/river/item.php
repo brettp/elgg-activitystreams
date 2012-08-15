@@ -5,17 +5,18 @@ $subject = $item->getSubjectEntity();
 $object = $item->getObjectEntity();
 $target = get_entity($object->container_guid);
 
+$summary = elgg_extract('summary', $vars, elgg_view('river/elements/summary', array('item' => $vars['item'])));
 $body = elgg_view($item->getView(), array('item' => $item), false, false, 'default');
 ?>
 
 <id><?php echo ActivityStreams::getRiverAtomID($item); ?></id>
 
 <published>
-	<?php date(DATE_ATOM, $item->getPostedTime()); ?>
+	<?php echo date(DATE_ATOM, $item->getPostedTime()); ?>
 </published>
 
 <title>
-	<?php echo elgg_strip_tags($body); ?>
+	<?php echo elgg_strip_tags($summary); ?>
 </title>
 
 <content type="html">
