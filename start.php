@@ -84,6 +84,8 @@ function activity_streams_json_encode($data, $recursive = true, $options = 0) {
 		foreach ($data as $v) {
 			if (!as_is_json($v)) {
 				$json[] = json_encode($v, $options);
+			} else {
+				$json[] = $v;
 			}
 		}
 		$json = implode(',', $json);
