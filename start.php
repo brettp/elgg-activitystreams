@@ -25,8 +25,6 @@
 
 function activity_streams_init() {
 	elgg_extend_view('page/elements/head', 'activity_streams/head_ext');
-	
-	elgg_register_viewtype_fallback('atom');
 }
 
 elgg_register_event_handler('init', 'system', 'activity_streams_init');
