@@ -6,13 +6,16 @@
  *
  * The lowest level of a view chain needs to do a deep encoding
  *	This is the object/* views
- * 
+ *
  * Every other level needs to do a shallow encoding.
- * 
+ *
  * Entity views (<type>/<subtype>) are used for the AS objects.
  *
- * River item views are / will be used for the content and title.
- * $item->view . '/title' and . '/content'
+ * River items views in the stream_json viewtype are used for rending the AS activity object,
+ * if found. If not, everything is routed through river/item.
+ *
+ * River item views with suffixes are / will be used for the content and title:
+ * "$item->view/title" and "$item->view/content" (@todo)
  *
  * References:
  * Where these disagree I've used the JSON specs / schemas.
@@ -82,6 +85,8 @@ function activity_streams_json_encode($data, $recursive = true, $options = 0) {
 		foreach ($data as $v) {
 			if (!as_is_json($v)) {
 				$json[] = json_encode($v, $options);
+			} else {
+				$json[] = $v;
 			}
 		}
 		$json = implode(',', $json);

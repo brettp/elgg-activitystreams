@@ -5,7 +5,7 @@
  *
  * @see http://activitystrea.ms/specs/json/1.0/#activity
  *
- * @uses ElggRiverItem $vars['item']    If passed, will detect the values for the above. Any values passed in have priority.
+ * @uses ElggRiverItem $vars['item']        If passed, will detect the values for the above. Any values passed in have priority.
  *
  * @uses AS/Object    $vars['actor']        The entity who performed the action. Usually an AS/Person.
  * @uses string       $vars['content']      Natural language describing the action. HTML ok.
