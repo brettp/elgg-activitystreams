@@ -27,7 +27,7 @@ $offset_key = elgg_extract('offset_key', $vars, 'offset');
 if (is_array($items) && count($items) > 0) {
 	foreach ($items as $item) {
 		echo "<entry>";
-		echo elgg_view_list_item($item, $full_view, $vars);
+		echo elgg_view_list_item($item, $vars);
 		echo "</entry>";
 	}
 }
