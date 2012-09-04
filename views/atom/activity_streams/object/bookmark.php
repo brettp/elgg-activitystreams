@@ -16,6 +16,6 @@ $bookmark = $vars['entity'];
 <updated>
 	<?php echo date(DATE_ATOM, $bookmark->time_updated); ?>
 </updated>
-<link rel="preview" type="image/png" href="<?php echo $bookmark->getIcon('small'); ?>" />
-<link rel="alternate" type="text/html" href="<?php echo $bookmark->getURL(); ?>" />
+<link rel="preview" type="image/png" href="<?php echo htmlspecialchars($bookmark->getIcon('small')); ?>" />
+<link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($bookmark->getURL()); ?>" />
 <activity:object-type>bookmark</activity:object-type>

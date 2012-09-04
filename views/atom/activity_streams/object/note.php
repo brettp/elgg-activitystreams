@@ -16,6 +16,6 @@ $note = $vars['entity'];
 <updated>
 	<?php echo date(DATE_ATOM, $note->time_updated); ?>
 </updated>
-<link rel="preview" type="image/png" href="<?php echo $note->getIcon('small'); ?>" />
-<link rel="alternate" type="text/html" href="<?php echo $note->getURL(); ?>" />
+<link rel="preview" type="image/png" href="<?php echo htmlspecialchars($note->getIcon('small')); ?>" />
+<link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($note->getURL()); ?>" />
 <activity:object-type>note</activity:object-type>
