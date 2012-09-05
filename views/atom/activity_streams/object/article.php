@@ -20,5 +20,5 @@ $article = $vars['entity'];
 	<?php echo date(DATE_ATOM, $article->time_updated); ?>
 </updated>
 <activity:object-type>article</activity:object-type>
-<link rel="preview" type="image/png" href="<?php echo $article->getIcon('small'); ?>" />
-<link rel="alternate" type="text/html" href="<?php echo $article->getURL(); ?>" />
+<link rel="preview" type="image/png" href="<?php echo htmlspecialchars($article->getIcon('small')); ?>" />
+<link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($article->getURL()); ?>" />

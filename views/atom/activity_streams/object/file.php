@@ -20,5 +20,5 @@ $file = $vars['entity'];
 	<?php echo date(DATE_ATOM, $file->time_updated); ?>
 </updated>
 <activity:object-type>article</activity:object-type>
-<link rel="preview" type="image/png" href="<?php echo $file->getIcon('small'); ?>" />
-<link rel="alternate" type="text/html" href="<?php echo $file->getURL(); ?>" />
+<link rel="preview" type="image/png" href="<?php echo htmlspecialchars($file->getIcon('small')); ?>" />
+<link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($file->getURL()); ?>" />
