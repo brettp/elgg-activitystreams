@@ -7,5 +7,13 @@ $group = $vars['entity'];
 <id><?php echo "{$vars['url']}$group->guid"; ?></id>
 <title><?php echo elgg_view('output/text', array('value' => $group->name)); ?></title>
 <summary><?php echo elgg_view('output/text', array('value' => $group->briefdescription)); ?></summary>
+<content><?php echo elgg_view('output/text', array('value' => $group->description)); ?></content>
+<published>
+	<?php echo date(DATE_ATOM, $group->time_created); ?>
+</published>
+<updated>
+	<?php echo date(DATE_ATOM, $group->time_updated); ?>
+</updated>
 <link rel="preview" type="image/png" href="<?php echo htmlspecialchars($group->getIcon('small')); ?>" />
 <link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($group->getURL()); ?>" />
+<activity:object-type>group</activity:object-type>
