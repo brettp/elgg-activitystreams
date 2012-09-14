@@ -29,3 +29,13 @@ $summary = elgg_extract('summary', $vars, elgg_view('river/elements/summary', ar
 <activity:object>
        <?php echo elgg_view_entity($object); ?>
 </activity:object>
+
+<?php
+if ($target instanceof ElggGroup) {
+?>
+<activity:target>
+       <?php echo elgg_view_entity($target); ?>
+</activity:target>
+
+<?php
+}
