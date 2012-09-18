@@ -21,16 +21,15 @@ if (empty($vars['title'])) {
 	$title = $vars['config']->sitename . ": " . $vars['title'];
 }
 
-// Remove Atom from URL
 $full_url = full_url();
 $site_url = elgg_get_site_url();
-if (strpos($site_url, 'https') == 0) {
-	if ((strpos($full_url, 'https') != 0) {
-		$full_url = str_replace('http', 'https', $full_url);
-	}
+
+// Fix protocol
+if (strpos($site_url, 'https://') == 0) {
+	$full_url = str_replace('http://', 'https://', $full_url);
 }
 
-
+// Remove Atom from URL
 $url = str_replace('?view=atom','', $full_url);
 $url = str_replace('&view=atom','', $url);
 
