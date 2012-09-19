@@ -2,6 +2,13 @@
 
 $note = $vars['entity'];
 
+// find parent
+if ($vars['top_level'] && $note->reply) {
+	$parents = $note->getEntitiesFromRelationship('parent');
+	if ($parents)
+		$parent = $parents[0];
+}
+
 ?>
 
 <id>
@@ -19,3 +26,11 @@ $note = $vars['entity'];
 <link rel="preview" type="image/png" href="<?php echo htmlspecialchars($note->getIcon('small')); ?>" />
 <link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($note->getURL()); ?>" />
 <activity:object-type>note</activity:object-type>
+<?php
+if ($parent) {
+?>
+<thr:in-reply-to>
+	<?php echo elgg_view_entity($parent); ?>
+</thr:in-reply-to>
+<?php
+}
