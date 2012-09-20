@@ -21,3 +21,5 @@ $bookmark = $vars['entity'];
 <link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($bookmark->getURL()); ?>" />
 <link rel="related" type="text/html" href="<?php echo htmlspecialchars($bookmark->address); ?>" />
 <activity:object-type>bookmark</activity:object-type>
+<?php
+echo ActivityStreams::formatTags($bookmark);

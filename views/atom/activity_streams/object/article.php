@@ -20,3 +20,5 @@ $article = $vars['entity'];
 <activity:object-type>article</activity:object-type>
 <link rel="preview" type="image/png" href="<?php echo htmlspecialchars($article->getIcon('small')); ?>" />
 <link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($article->getURL()); ?>" />
+<?php
+echo ActivityStreams::formatTags($article);

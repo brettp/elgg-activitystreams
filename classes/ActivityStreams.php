@@ -34,4 +34,17 @@ class ActivityStreams {
 	public static function formatDate($date) {
 		return date(DATE_ATOM, $date);
 	}
+
+	public static function formatTags($entity) {
+		$tags = $entity->getTags();
+		if (!$tags) {
+			return "";
+		}
+		$output = "";
+		foreach ($tags as $tag) {
+			$tag = htmlspecialchars($tag);
+			$output .= '<category scheme="urn:tag" term="'.$tag.'" label="'.$tag.'" />';
+		}
+		return $output;
+	}
 }

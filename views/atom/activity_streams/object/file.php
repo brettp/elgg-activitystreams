@@ -22,3 +22,5 @@ $download_url = elgg_get_site_url() . "file/download/{$file->getGUID()}";
 <link rel="preview" type="image/png" href="<?php echo htmlspecialchars($file->getIcon('small')); ?>" />
 <link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($file->getURL()); ?>" />
 <link rel="enclosure" type="<?php echo $file->getMimeType(); ?>" href="<?php echo htmlspecialchars($download_url); ?>" />
+<?php
+echo ActivityStreams::formatTags($bookmark);
