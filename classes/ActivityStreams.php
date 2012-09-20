@@ -8,8 +8,14 @@ class ActivityStreams {
 		$date = date('Y-m-d', $entity->time_created);
 		$type = $entity->getType();
 		$guid = $entity->getGUID();
+
+		$id = "tag:$host,$date:/$type/$guid";
+		$params = array('entity' => $entity);
+
+		// allow plugins to override default id
+		$atom_id = elgg_trigger_plugin_hook('activitystreams:id', 'entity', $params, $id);
 		
-		return "tag:$host,$date:/$type/$guid";
+		return $atom_id;
 	}
 	
 	public static function getRiverAtomID(ElggRiverItem $item) {
@@ -17,7 +23,12 @@ class ActivityStreams {
 		$date = date('Y-m-d', $item->posted);
 		$id = $item->id;
 		
-		return "tag:$host,$date:/river/$id";
+		$atom_id = "tag:$host,$date:/river/$id";
+		$params = array('item' => $item);
+
+		// allow plugins to override default id
+		$atom_id = elgg_trigger_plugin_hook('activitystreams:id', 'river', $params, $atom_id);
+		return $atom_id;
 	}
 
 	public static function formatDate($date) {
