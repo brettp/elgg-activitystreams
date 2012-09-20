@@ -5,9 +5,7 @@ $download_url = elgg_get_site_url() . "file/download/{$file->getGUID()}";
 
 ?>
 
-<id>
-	<?php echo "{$vars['url']}$file->guid"; ?>
-</id>
+<id><?php echo ActivityStreams::getEntityAtomID($file); ?></id>
 <title>
 	<?php echo elgg_view('output/text', array('value' => $file->title)); ?>
 </title>

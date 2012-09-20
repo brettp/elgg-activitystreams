@@ -4,9 +4,7 @@ $bookmark = $vars['entity'];
 
 ?>
 
-<id>
-	<?php echo "{$vars['url']}$bookmark->guid"; ?>
-</id>
+<id><?php echo ActivityStreams::getEntityAtomID($bookmark); ?></id>
 <title>
 	<?php echo elgg_view('output/text', array('value' => $bookmark->title)); ?>
 </title>

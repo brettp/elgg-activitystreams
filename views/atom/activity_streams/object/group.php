@@ -4,7 +4,7 @@ $group = $vars['entity'];
 
 ?>
 
-<id><?php echo "{$vars['url']}$group->guid"; ?></id>
+<id><?php echo ActivityStreams::getEntityAtomID($group); ?></id>
 <title><?php echo elgg_view('output/text', array('value' => $group->name)); ?></title>
 <summary><?php echo elgg_view('output/text', array('value' => $group->briefdescription)); ?></summary>
 <content><?php echo elgg_view('output/text', array('value' => $group->description)); ?></content>

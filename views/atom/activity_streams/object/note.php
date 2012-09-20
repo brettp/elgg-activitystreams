@@ -11,9 +11,7 @@ if ($vars['top_level'] && $note->reply) {
 
 ?>
 
-<id>
-	<?php echo "{$vars['url']}$note->guid"; ?>
-</id>
+<id><?php echo ActivityStreams::getEntityAtomID($note); ?></id>
 <content><![CDATA[<?php 
 	echo elgg_view('output/longtext', array('value' => $note->description)); 
 ?>]]></content>

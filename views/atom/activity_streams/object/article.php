@@ -4,9 +4,7 @@ $article = $vars['entity'];
 
 ?>
 
-<id>
-	<?php echo "{$vars['url']}$article->guid"; ?>
-</id>
+<id><?php echo ActivityStreams::getEntityAtomID($article); ?></id>
 <title>
 	<?php echo elgg_view('output/text', array('value' => $article->title)); ?>
 </title>
