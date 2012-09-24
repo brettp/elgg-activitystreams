@@ -2,14 +2,8 @@
 $item = $vars['item'];
 
 $subject = $item->getSubjectEntity();
-$object = $item->getObjectEntity();
+$object = $item->getAnnotation();
 $target = get_entity($object->container_guid);
-
-$view = $item->getView();
-if (elgg_view_exists($view)) {
-	echo elgg_view($view, $vars);
-} else {
-
 
 $summary = elgg_extract('summary', $vars, elgg_view('river/elements/summary', array('item' => $vars['item']), false, false, 'default'));
 ?>
@@ -33,16 +27,15 @@ $summary = elgg_extract('summary', $vars, elgg_view('river/elements/summary', ar
 </activity:verb>
 
 <activity:object>
-       <?php echo elgg_view_entity($object); ?>
+       <?php echo elgg_view_annotation($object); ?>
 </activity:object>
 
 <?php
-	if ($target instanceof ElggGroup) {
+if ($target instanceof ElggGroup) {
 ?>
 <activity:target>
        <?php echo elgg_view_entity($target); ?>
 </activity:target>
 
 <?php
-	}
 }

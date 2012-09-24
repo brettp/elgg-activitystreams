@@ -16,6 +16,5 @@ $comment = $vars['annotation'];
 <published>
 	<?php echo date(DATE_ATOM, $comment->time_created); ?>
 </published>
-<link rel="preview" type="image/png" href="<?php echo htmlspecialchars($comment->getIcon('small')); ?>" />
 <link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($comment->getURL()); ?>" />
 <activity:object-type>comment</activity:object-type>
