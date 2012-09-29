@@ -5,11 +5,11 @@
  * @todo There is no way to get a good title.
  */
 
-global $autofeed;
+/*global $autofeed;
 
 if (!$autofeed) {
 	return true;
-}
+}*/
 
 $xml_url = elgg_http_add_url_query_elements(current_page_url(), array('view' => 'atom'));
 $json_url = elgg_http_add_url_query_elements(current_page_url(), array('view' => 'json'));
