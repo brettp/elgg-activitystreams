@@ -18,9 +18,9 @@ $download_url = elgg_get_site_url() . "file/download/{$file->getGUID()}";
 <updated>
 	<?php echo date(DATE_ATOM, $file->time_updated); ?>
 </updated>
-<activity:object-type>file</activity:object-type>
+<activity:object-type>http://activitystrea.ms/schema/1.0/file</activity:object-type>
 <link rel="preview" type="image/png" href="<?php echo htmlspecialchars($file->getIcon('small')); ?>" />
 <link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($file->getURL()); ?>" />
 <link rel="enclosure" type="<?php echo $file->getMimeType(); ?>" href="<?php echo htmlspecialchars($download_url); ?>" />
 <?php
-echo ActivityStreams::formatTags($bookmark);
+echo ActivityStreams::formatTags($file);

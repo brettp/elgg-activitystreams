@@ -23,7 +23,7 @@ if ($vars['top_level'] && $note->reply) {
 </updated>
 <link rel="preview" type="image/png" href="<?php echo htmlspecialchars($note->getIcon('small')); ?>" />
 <link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($note->getURL()); ?>" />
-<activity:object-type>note</activity:object-type>
+<activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
 <?php
 if ($parent) {
 ?>

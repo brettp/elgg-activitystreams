@@ -17,7 +17,7 @@ $article = $vars['entity'];
 <updated>
 	<?php echo date(DATE_ATOM, $article->time_updated); ?>
 </updated>
-<activity:object-type>article</activity:object-type>
+<activity:object-type>http://activitystrea.ms/schema/1.0/article</activity:object-type>
 <link rel="preview" type="image/png" href="<?php echo htmlspecialchars($article->getIcon('small')); ?>" />
 <link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($article->getURL()); ?>" />
 <?php

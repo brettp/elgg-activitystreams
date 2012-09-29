@@ -16,4 +16,4 @@ $group = $vars['entity'];
 </updated>
 <link rel="preview" type="image/png" href="<?php echo htmlspecialchars($group->getIcon('small')); ?>" />
 <link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($group->getURL()); ?>" />
-<activity:object-type>group</activity:object-type>
+<activity:object-type>http://activitystrea.ms/schema/1.0/group</activity:object-type>

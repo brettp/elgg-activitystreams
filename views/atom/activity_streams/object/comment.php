@@ -17,4 +17,4 @@ $comment = $vars['annotation'];
 	<?php echo date(DATE_ATOM, $comment->time_created); ?>
 </published>
 <link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($comment->getURL()); ?>" />
-<activity:object-type>comment</activity:object-type>
+<activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>
