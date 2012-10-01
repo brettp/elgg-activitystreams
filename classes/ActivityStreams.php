@@ -44,6 +44,19 @@ class ActivityStreams {
 		return $atom_id;
 	}
 
+	public static function getAnnotationAtomID($comment) {
+		$site_url = elgg_get_site_url();
+
+		$atom_id = "{$site_url}annotation/$comment->id";
+
+		$params = array('annotation' => $comment);
+
+		// allow plugins to override default id
+		$atom_id = elgg_trigger_plugin_hook('activitystreams:id', 'annotation', $params, $atom_id);
+		return $atom_id;
+	}
+
+
 	public static function formatDate($date) {
 		return date(DATE_ATOM, $date);
 	}

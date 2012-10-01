@@ -4,7 +4,7 @@ $comment = $vars['annotation'];
 
 ?>
 
-<id><?php echo "{$vars['url']}annotation/$comment->id"; ?></id>
+<id><?php echo ActivityStreams::getAnnotationAtomID($comment); ?></id>
 <content><![CDATA[<?php 
 	echo elgg_view('output/longtext', array('value' => $comment->value)); 
 ?>]]></content>
