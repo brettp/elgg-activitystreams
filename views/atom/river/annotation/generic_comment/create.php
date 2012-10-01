@@ -6,6 +6,9 @@ $object = $item->getAnnotation();
 $target = get_entity($object->container_guid);
 
 $summary = elgg_extract('summary', $vars, elgg_view('river/elements/summary', array('item' => $vars['item']), false, false, 'default'));
+
+$parent = get_entity($object->entity_guid);
+$parent_id = ActivityStreams::getEntityAtomID($parent);
 ?>
 
 <id><?php echo ActivityStreams::getRiverAtomID($item); ?></id>
@@ -39,3 +42,6 @@ if ($target instanceof ElggGroup) {
 
 <?php
 }
+?>
+
+<thr:in-reply-to ref="<?php echo $parent_id; ?>" href="<?php echo $parent_id; ?>"></thr:in-reply-to>

@@ -10,6 +10,10 @@ if (elgg_view_exists($view)) {
 	echo elgg_view($view, $vars);
 } else {
 
+$parent = ActivityStreams::getParent($object);
+if ($parent) {
+	$parent_id = ActivityStreams::getEntityAtomID($parent);
+}
 
 $summary = elgg_extract('summary', $vars, elgg_view('river/elements/summary', array('item' => $vars['item']), false, false, 'default'));
 ?>
@@ -35,6 +39,12 @@ $summary = elgg_extract('summary', $vars, elgg_view('river/elements/summary', ar
 </activity:object>
 
 <?php
+	// parent must be printed in entry
+	if ($parent_id) {
+?>
+<thr:in-reply-to ref="<?php echo $parent_id; ?>" href="<?php echo $parent_id; ?>"></thr:in-reply-to>
+<?php
+	}
 	if ($target instanceof ElggGroup) {
 ?>
 <activity:target>

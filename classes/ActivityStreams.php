@@ -4,12 +4,14 @@
  */
 class ActivityStreams {
 	public static function getEntityAtomID(ElggEntity $entity) {
-		$host = parse_url(elgg_get_site_url(), PHP_URL_HOST);
-		$date = date('Y-m-d', $entity->time_created);
-		$type = $entity->getType();
-		$guid = $entity->getGUID();
+                $host = parse_url(elgg_get_site_url(), PHP_URL_HOST);
+                $date = date('Y-m-d', $entity->time_created);
+                $type = $entity->getType();
+                $guid = $entity->getGUID();
 
-		$id = "tag:$host,$date:/$type/$guid";
+                $id = "tag:$host,$date:/$type/$guid";
+
+		#$id = htmlspecialchars($entity->getURL());
 		$params = array('entity' => $entity);
 
 		// allow plugins to override default id
@@ -17,7 +19,18 @@ class ActivityStreams {
 		
 		return $atom_id;
 	}
-	
+	public static function getParent(ElggEntity $entity) {
+		$params = array('entity' => $entity);
+		return elgg_trigger_plugin_hook('activitystreams:parent', 'entity', $params, false);
+	}
+	public static function formatAvatarIcons($entity) {
+		echo '<link rel="avatar" type="image/png" media:width="25" media:height="25" href="'.htmlspecialchars($entity->getIcon('tiny')).'" />'."\n";
+		echo '<link rel="avatar" type="image/png" media:width="40" media:height="40" href="'.htmlspecialchars($entity->getIcon('small')).'" />'."\n";
+		echo '<link rel="avatar" type="image/png" media:width="100" media:height="100" href="'.htmlspecialchars($entity->getIcon('medium')).'" />'."\n";
+		echo '<link rel="avatar" type="image/png" media:width="200" media:height="200" href="'.htmlspecialchars($entity->getIcon('large')).'" />'."\n";
+		echo '<link rel="avatar" type="image/png" media:width="550" media:height="550" href="'.htmlspecialchars($entity->getIcon('master')).'" />'."\n";
+	}
+
 	public static function getRiverAtomID(ElggRiverItem $item) {
 		$host = parse_url(elgg_get_site_url(), PHP_URL_HOST);
 		$date = date('Y-m-d', $item->posted);
