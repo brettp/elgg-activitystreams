@@ -2,7 +2,7 @@
 $item = $vars['item'];
 
 $subject = $item->getSubjectEntity();
-$object = $item->getObjectEntity();
+$object = ActivityStreams::getObject($item);
 $target = get_entity($object->container_guid);
 
 $view = $item->getView();
@@ -22,7 +22,7 @@ $summary = elgg_extract('summary', $vars, elgg_view('river/elements/summary', ar
 
 <published><?php echo date(DATE_ATOM, $item->getPostedTime()); ?></published>
 
-<title><?php echo elgg_strip_tags($summary); ?></title>
+<title><?php echo htmlspecialchars(elgg_strip_tags($summary)); ?></title>
 
 <content type="html">
        <?php echo elgg_view('output/text', array('value' => $summary)); ?>
