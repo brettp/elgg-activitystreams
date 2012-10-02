@@ -1,10 +1,17 @@
 <?php
 
 $note = $vars['entity'];
-
+$title = $note->title;
 ?>
 
 <id><?php echo ActivityStreams::getEntityAtomID($note); ?></id>
+<?php
+if ($title) {
+?>
+<title><?php echo htmlspecialchars($title); ?></title>
+<?php
+}
+?>
 <content><![CDATA[<?php 
 	echo elgg_view('output/longtext', array('value' => $note->description)); 
 ?>]]></content>
