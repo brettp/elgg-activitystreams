@@ -23,4 +23,4 @@ if ($parse_urls) {
 
 $text = strip_tags($text);
 
-echo "$text";
+echo htmlspecialchars($text, ENT_QUOTES, 'UTF-8', false);
