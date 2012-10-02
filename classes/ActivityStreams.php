@@ -19,6 +19,12 @@ class ActivityStreams {
 		
 		return $atom_id;
 	}
+	public static function getObject($item) {
+		$object = $item->getObjectEntity();
+		$params = array('item' => $item);
+		return elgg_trigger_plugin_hook('activitystreams:object', 'river', $params, $object);
+	}
+
 	public static function getParent(ElggEntity $entity) {
 		$params = array('entity' => $entity);
 		return elgg_trigger_plugin_hook('activitystreams:parent', 'entity', $params, false);
