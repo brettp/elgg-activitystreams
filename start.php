@@ -35,13 +35,20 @@ function activity_streams_note_parent($hook, $type, $return, $params) {
 			return $parent;
 		}
 	}
+	elseif ($object && $object->getSubtype() == 'page') {
+		$parent = get_entity($object->container_guid);
+		if ($parent) {
+			return $parent;
+		}
+	}
+
         return $return;
 }
 
 function activity_streams_init() {
 	elgg_extend_view('page/elements/head', 'activity_streams/head_ext');
 
-	elgg_register_plugin_hook_handler('activitystreams:parent', 'entity', 'activity_streams_note_parent');
+	elgg_register_plugin_hook_handler('activitystreams:parent', 'entity', 'activity_streams_parent');
 }
 
 elgg_register_event_handler('init', 'system', 'activity_streams_init');
