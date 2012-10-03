@@ -25,9 +25,7 @@ $parent_id = ActivityStreams::getEntityAtomID($parent);
        <?php echo elgg_view_entity($subject); ?>
 </author>
 
-<activity:verb>
-       <?php echo elgg_echo("activity_streams:verb:$item->action_type"); ?>
-</activity:verb>
+<activity:verb><?php echo elgg_echo("activity_streams:verb:$item->action_type"); ?></activity:verb>
 
 <activity:object>
        <?php echo elgg_view_annotation($object); ?>
