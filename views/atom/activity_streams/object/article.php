@@ -1,5 +1,9 @@
 <?php
 
+$type = $vars['type'];
+if (empty($type))
+	$type = 'http://activitystrea.ms/schema/1.0/article';
+
 $article = $vars['entity'];
 
 ?>
@@ -8,6 +12,15 @@ $article = $vars['entity'];
 <title>
 	<?php echo elgg_view('output/text', array('value' => $article->title)); ?>
 </title>
+<?php
+if ($article->excerpt) {
+?>
+<summary>
+	<?php echo elgg_view('output/text', array('value' => $article->excerpt)); ?>
+</summary>
+<?php
+}
+?>
 <content type="html">
 	<?php echo elgg_view('output/text', array('value' => $article->description)); ?>
 </content>
@@ -17,7 +30,7 @@ $article = $vars['entity'];
 <updated>
 	<?php echo date(DATE_ATOM, $article->time_updated); ?>
 </updated>
-<activity:object-type>http://activitystrea.ms/schema/1.0/article</activity:object-type>
+<activity:object-type><?php echo $type; ?></activity:object-type>
 <link rel="preview" type="image/png" href="<?php echo htmlspecialchars($article->getIcon('small')); ?>" />
 <link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($article->getURL()); ?>" />
 <?php
