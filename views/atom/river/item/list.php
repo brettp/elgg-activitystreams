@@ -10,5 +10,5 @@ $items = array();
 extract($vars, EXTR_IF_EXISTS);
 
 foreach ($items as $item) {
-	echo elgg_view('river/item', array('item' => $item));
+	echo elgg_view_river_item($item);
 }

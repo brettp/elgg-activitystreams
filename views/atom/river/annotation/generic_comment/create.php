@@ -2,27 +2,20 @@
 $item = $vars['item'];
 
 $subject = $item->getSubjectEntity();
-$object = ActivityStreams::getObject($item);
+$object = $item->getAnnotation();
 $target = get_entity($object->container_guid);
 
-$view = $item->getView();
-if (elgg_view_exists($view)) {
-	echo elgg_view($view, $vars);
-} else {
-
-$parent = ActivityStreams::getParent($object);
-if ($parent) {
-	$parent_id = ActivityStreams::getEntityAtomID($parent);
-}
-
 $summary = elgg_extract('summary', $vars, elgg_view('river/elements/summary', array('item' => $vars['item']), false, false, 'default'));
+
+$parent = get_entity($object->entity_guid);
+$parent_id = ActivityStreams::getEntityAtomID($parent);
 ?>
 
 <id><?php echo ActivityStreams::getRiverAtomID($item); ?></id>
 
 <published><?php echo date(DATE_ATOM, $item->getPostedTime()); ?></published>
 
-<title><?php echo htmlspecialchars(elgg_strip_tags($summary)); ?></title>
+<title><?php echo elgg_strip_tags($summary); ?></title>
 
 <content type="html">
        <?php echo elgg_view('output/text', array('value' => $summary)); ?>
@@ -35,22 +28,18 @@ $summary = elgg_extract('summary', $vars, elgg_view('river/elements/summary', ar
 <activity:verb><?php echo elgg_echo("activity_streams:verb:$item->action_type"); ?></activity:verb>
 
 <activity:object>
-       <?php echo elgg_view_entity($object); ?>
+       <?php echo elgg_view_annotation($object); ?>
 </activity:object>
 
 <?php
-	// parent must be printed in entry
-	if ($parent_id) {
-?>
-<thr:in-reply-to ref="<?php echo $parent_id; ?>" href="<?php echo $parent_id; ?>"></thr:in-reply-to>
-<?php
-	}
-	if ($target instanceof ElggGroup) {
+if ($target instanceof ElggGroup) {
 ?>
 <activity:target>
        <?php echo elgg_view_entity($target); ?>
 </activity:target>
 
 <?php
-	}
 }
+?>
+
+<thr:in-reply-to ref="<?php echo $parent_id; ?>" href="<?php echo $parent_id; ?>"></thr:in-reply-to>
