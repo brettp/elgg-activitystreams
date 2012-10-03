@@ -1,6 +1,11 @@
 <?php
 
-	$user = elgg_get_page_owner_entity();
+	if ($vars['entity']) {
+		$user = $vars['entity'];
+	}
+	else {
+		$user = elgg_get_page_owner_entity();
+	}
 
 ?>
 <link href="<?php echo htmlspecialchars($user->getIcon('topbar')); ?>" rel="avatar" type="image/png" media:height="16" media:width="16" />
