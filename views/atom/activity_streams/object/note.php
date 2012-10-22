@@ -1,12 +1,17 @@
 <?php
 
 $note = $vars['entity'];
-
+$title = $note->title;
 ?>
 
-<id>
-	<?php echo "{$vars['url']}$note->guid"; ?>
-</id>
+<id><?php echo ActivityStreams::getEntityAtomID($note); ?></id>
+<?php
+if ($title) {
+?>
+<title><?php echo htmlspecialchars($title); ?></title>
+<?php
+}
+?>
 <content><![CDATA[<?php 
 	echo elgg_view('output/longtext', array('value' => $note->description)); 
 ?>]]></content>
@@ -18,4 +23,5 @@ $note = $vars['entity'];
 </updated>
 <link rel="preview" type="image/png" href="<?php echo htmlspecialchars($note->getIcon('small')); ?>" />
 <link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($note->getURL()); ?>" />
-<activity:object-type>note</activity:object-type>
+<activity:object-type>http://activitystrea.ms/schema/1.0/note</activity:object-type>
+

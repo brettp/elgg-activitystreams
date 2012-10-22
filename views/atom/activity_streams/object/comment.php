@@ -4,18 +4,12 @@ $comment = $vars['annotation'];
 
 ?>
 
-<id>
-	<?php echo "{$vars['url']}annotation/$comment->id"; ?>
-</id>
+<id><?php echo ActivityStreams::getAnnotationAtomID($comment); ?></id>
 <content><![CDATA[<?php 
 	echo elgg_view('output/longtext', array('value' => $comment->value)); 
 ?>]]></content>
-<thr:in-reply-to>
-	<?php echo elgg_view_entity(get_entity($comment->entity_guid)); ?>
-</thr:in-reply-to>
 <published>
 	<?php echo date(DATE_ATOM, $comment->time_created); ?>
 </published>
-<link rel="preview" type="image/png" href="<?php echo htmlspecialchars($comment->getIcon('small')); ?>" />
 <link rel="alternate" type="text/html" href="<?php echo htmlspecialchars($comment->getURL()); ?>" />
-<activity:object-type>comment</activity:object-type>
+<activity:object-type>http://activitystrea.ms/schema/1.0/comment</activity:object-type>

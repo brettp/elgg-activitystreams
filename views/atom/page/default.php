@@ -21,15 +21,19 @@ if (empty($vars['title'])) {
 	$title = $vars['config']->sitename . ": " . $vars['title'];
 }
 
-// Remove Atom from URL
-$url = str_replace('?view=atom','', full_url());
-$url = str_replace('&view=atom','', $url);
+$full_url = current_page_url();
 
-echo "<?xml version='1.0' encoding='UTF-8' standalone='no' ?>\n";
+// Remove Atom from URL
+$url = elgg_http_add_url_query_elements($full_url, array('view' => 'atom'));
+
+echo "<?xml version='1.0' encoding='UTF-8' ?>\n";
 ?>
-<feed xmlns="http://www.w3.org/2005/Atom" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:georss="http://www.georss.org/georss" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:media="http://purl.org/syndication/atommedia" xml:lang="en-US" <?php echo elgg_view('extensions/xmlns'); ?>>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:georss="http://www.georss.org/georss" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:media="http://purl.org/syndication/atommedia" xmlns:poco="http://portablecontacts.net/spec/1.0" xmlns:context="http://activitystrea.ms/context/" xml:lang="en-US" <?php echo elgg_view('extensions/xmlns'); ?>>
 	<title><?php echo elgg_view('output/text', array('value' => $title)); ?></title>
+	<id><?php echo $full_url; ?></id>
+	<updated><?php echo date(DATE_ATOM); ?></updated>
 	<link rel="alternate" type="text/html" href="<?php echo htmlentities($url); ?>" />	
+	<link rel="self" type="application/rss+xml" href="<?php echo htmlentities($full_url); ?>" />	
 	<?php echo elgg_view('extensions/channel'); ?>
 	<?php echo $vars['body']; ?>
 </feed>
